@@ -13,10 +13,8 @@ var Dashboard = React.createClass({
   getInitialState: function () {
     return {
       tasks: tasks,
-      newTask: {
-          name: '',
-          author: ''
-      }
+      name: '',
+      author: ''
     }
   },
   render: function() {
@@ -37,35 +35,27 @@ var Dashboard = React.createClass({
 
           <form className="NewTaskForm">
             <input type="text" placeholder="Task info"
-                   value = { this.state.newTask.name } onChange = { this._changeName } />
+                   value = { this.state.name } onChange = { this._changeName } />
             <input type="text" placeholder="Author name"
-                   value = { this.state.newTask.author } onChange = { this._changeAuthor } />
+                   value = { this.state.author } onChange = { this._changeAuthor } />
             <input type="button" onClick = { this._createNewTask }/>
           </form>
         </div>
     );
   },
   _clearNewTask: function () {
-    this.setState({ newTask: {
-      name: '',
-      author: ''
-    }});
+    this.setState({ name: '', author: '' });
   },
   _changeAuthor: function (e) {
-    this.setState({ newTask: {
-      author: e.target.value
-    }});
+    this.setState({ author: e.target.value });
   },
   _changeName: function (e) {
-    this.setState({ newTask: {
-      name: e.target.value
-    }});
+    this.setState({ name: e.target.value });
   },
   _createNewTask: function () {
-    this.state.tasks.push({
-      name: this.state.newTask.name,
-      author: this.state.newTask.author
-    });
+    var tests = this.state.tasks;
+    tests.push({ name: this.state.name, author: this.state.author });
+    this.setState({ tasks: tests });
 
     this._clearNewTask();
   }
