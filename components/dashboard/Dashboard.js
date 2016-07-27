@@ -1,9 +1,13 @@
 import React from 'react';
-import Task from '../task/Task.js';
+import {Link } from 'react-router';
+
+
 var tasks = [{
+  id: 1,
   name: 'Learning ReactJS',
   author: 'Username author'
 }, {
+  id: 2,
   name: 'Write TODO',
   author: 'Admin'
 }];
@@ -23,10 +27,11 @@ var Dashboard = React.createClass({
           <h1>DASHBOARD</h1>
           <ui>
             {
-              this.state.tasks.map(function(task, i) {
+              this.state.tasks.map(function(task) {
                 return (
                     <li>
-                      <Task task = { task } key = { i }/>
+                      <h3><Link to = { "task/" + task.id }>{ task.name }</Link></h3>
+                      <h5>{ task.author }</h5>
                     </li>
                 )
               })
