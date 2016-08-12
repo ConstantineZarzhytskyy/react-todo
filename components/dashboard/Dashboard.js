@@ -1,22 +1,15 @@
-import React from 'react';
 import {Link } from 'react-router';
-
-
-var tasks = [{
-  id: 1,
-  name: 'Learning ReactJS',
-  author: 'Username author'
-}, {
-  id: 2,
-  name: 'Write TODO',
-  author: 'Admin'
-}];
-
+import React from 'react';
+import {Provider, connect} from "react-redux";
+import {getTask} from "../../action/taskAction.js";
+import {bindActionCreators} from "redux"
 
 var Dashboard = React.createClass({
   getInitialState: function () {
+
+    this.props.getTask();
+    console.log(this.props.tasks);
     return {
-      tasks: tasks,
       name: '',
       author: ''
     }
@@ -27,7 +20,7 @@ var Dashboard = React.createClass({
           <h1>DASHBOARD</h1>
           <ui>
             {
-              this.state.tasks.map(function(task) {
+              this.props.tasks.map(function(task) {
                 return (
                     <li>
                       <h3><Link to = { "task/" + task.id }>{ task.name }</Link></h3>
@@ -66,4 +59,17 @@ var Dashboard = React.createClass({
   }
 });
 
-module.exports = Dashboard;
+const mapStoreToProps = (store) => {
+  return {
+    tasks: store.tasks
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getTask: bindActionCreators(getTask, dispatch)
+  }
+};
+
+export default connect(mapStoreToProps, mapDispatchToProps)(Dashboard);
+

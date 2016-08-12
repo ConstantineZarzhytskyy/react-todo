@@ -1,6 +1,6 @@
 import React from 'react';
 import {Provider, connect} from "react-redux";
-import {increaseCounterToValue, decCounterToValue, resetToDefaultValue} from "./action/counterAction.js";
+import {increaseCounterToValue, decCounterToValue, resetToDefaultValue} from "../../action/counterAction.js";
 import {bindActionCreators} from "redux"
 
 var Task = React.createClass({
@@ -11,8 +11,8 @@ var Task = React.createClass({
     };
   },
   render: function () {
-    var status = this.props.params.status;
-    console.log(status);
+    var taskId = this.props.params.taskId;
+    console.log(taskId);
     return (
         <div>
           <h1>{ this.props.counter }</h1>

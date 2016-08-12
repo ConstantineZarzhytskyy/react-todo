@@ -5,7 +5,7 @@ var counter = function (state = 0, action = null) {
     case 'DECREMENT_TO_VALUE':
       return state - 1;
     case 'INCREASE_TO_VALUE':
-      return  state = ++state;
+      return state = ++state;
     default:
       return state;
   }
