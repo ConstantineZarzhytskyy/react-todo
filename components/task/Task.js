@@ -1,21 +1,33 @@
 import React from 'react';
-import {Provider, connect} from "react-redux";
-import {increaseCounterToValue, decCounterToValue, resetToDefaultValue} from "../../action/counterAction.js";
+import {connect} from "react-redux";
+import {getTask} from "../../action/taskAction.js";
 import {bindActionCreators} from "redux"
 
 var Task = React.createClass({
   getInitialState: function () {
+    this.props.getTasks();
     return {
         name: 'Write TODO',
         author: 'Admin'
       };
   },
-  render: function () {
+
+  componentDidMount: function () {
     var taskId = this.props.params.taskId;
-    console.log(taskId);
+    var tasks = this.props.tasks;
+    for(var i in tasks) {
+      if (tasks[i].id == taskId) {
+        this.setState({
+          name: tasks[i].name,
+          author: tasks[i].author
+        })
+      }
+    }
+  },
+
+  render: function () {
     return (
         <div>
-          <h1>{ this.props.counter }</h1>
           <h3>{ this.state.name }</h3>
           <h5>{ this.state.author }</h5>
         </div>
@@ -25,15 +37,13 @@ var Task = React.createClass({
 
 const mapStoreToProps = (store) => {
   return {
-    counter: store.counter
+    tasks: store.tasks
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    increaseCounterToValue: bindActionCreators(increaseCounterToValue, dispatch),
-    decCounterToValue: bindActionCreators(decCounterToValue, dispatch),
-    resetToDefaultValue: bindActionCreators(resetToDefaultValue, dispatch)
+    getTasks: bindActionCreators(getTask, dispatch)
   }
 };
 
