@@ -5,10 +5,9 @@ import { createStore, applyMiddleware  } from "redux";
 import { Provider, connect } from "react-redux";
 import Dashboard from './components/dashboard/Dashboard.js';
 import Task from './components/task/Task.js';
-import rootReducer from './reducer/reducerCounter.js';
+import rootReducer from './reducer/rootReducer.js';
 
 const store = createStore(rootReducer, {
-    counter: 2,
     tasks: []
 });
 

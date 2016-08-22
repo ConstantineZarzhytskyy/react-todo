@@ -6,9 +6,7 @@ import {bindActionCreators} from "redux"
 
 var Dashboard = React.createClass({
   getInitialState: function () {
-
-    this.props.getTask();
-    console.log(this.props.tasks);
+    this.props.getTasks();
     return {
       name: '',
       author: ''
@@ -20,9 +18,9 @@ var Dashboard = React.createClass({
           <h1>DASHBOARD</h1>
           <ui>
             {
-              this.props.tasks.map(function(task) {
+              this.props.tasks.map(function(task,key) {
                 return (
-                    <li>
+                    <li key={key}>
                       <h3><Link to = { "task/" + task.id }>{ task.name }</Link></h3>
                       <h5>{ task.author }</h5>
                     </li>
@@ -51,11 +49,12 @@ var Dashboard = React.createClass({
     this.setState({ name: e.target.value });
   },
   _createNewTask: function () {
-    var tests = this.state.tasks;
-    tests.push({ name: this.state.name, author: this.state.author });
-    this.setState({ tasks: tests });
+    // var tests = this.state.tasks;
+    // tests.push({ name: this.state.name, author: this.state.author });
+    // this.setState({ tasks: tests });
 
-    this._clearNewTask();
+    console.log(this.props.tasks);
+    // this._clearNewTask();
   }
 });
 
@@ -67,7 +66,7 @@ const mapStoreToProps = (store) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getTask: bindActionCreators(getTask, dispatch)
+    getTasks: bindActionCreators(getTask, dispatch)
   }
 };
 

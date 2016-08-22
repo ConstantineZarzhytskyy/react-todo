@@ -22,5 +22,5 @@ module.exports = {
   devServer: {
     historyApiFallback: true
   },
-  devtool: "eval"
+  devtool: "source-map"
 };

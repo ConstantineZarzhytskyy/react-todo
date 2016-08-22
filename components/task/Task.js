@@ -6,9 +6,9 @@ import {bindActionCreators} from "redux"
 var Task = React.createClass({
   getInitialState: function () {
     return {
-      name: 'Write TODO',
-      author: 'Admin'
-    };
+        name: 'Write TODO',
+        author: 'Admin'
+      };
   },
   render: function () {
     var taskId = this.props.params.taskId;
